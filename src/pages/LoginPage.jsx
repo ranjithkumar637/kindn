@@ -19,10 +19,15 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    const dashRoutes = {
+      admin: "/admin",
+      volunteer: "/dashboard",
+      requester: "/my-requests",
+    };  
     try {
       const res = await API.post("/auth/login", form);
       login(res.data);
-      navigate("/");
+      navigate(dashRoutes[dashRoutes[login.role] || "/default"]);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed.");
     }
