@@ -27,15 +27,16 @@ const LoginPage = () => {
     try {
       const res = await API.post("/auth/login", form);
       login(res.data);
-      navigate(dashRoutes[dashRoutes[login.role] || "/default"]);
+      const userRole = res.data.user.role;
+      navigate(dashRoutes[userRole] || "/default");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed.");
     }
   };
 
   return (
-    <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
+    <Container maxWidth="sm" sx={{ py: 4 }}>
+      <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
         <Typography variant="h4" align="center" gutterBottom>
           Login
         </Typography>

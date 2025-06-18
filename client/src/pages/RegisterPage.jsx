@@ -8,7 +8,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", password: "", role: "requester" });
+  const [form, setForm] = useState({ username: "", email: "", password: "", role: "requester" });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -26,16 +26,16 @@ const RegisterPage = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
+    <Container maxWidth="sm" sx={{ py: 4 }}>
+      <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
         <Typography variant="h4" align="center" gutterBottom>
           Register
         </Typography>
         {error && <Alert severity="error">{error}</Alert>}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
           <TextField
-            label="Name"
-            name="name"
+            label="Username"
+            name="username"
             fullWidth
             margin="normal"
             onChange={handleChange}

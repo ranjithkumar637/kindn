@@ -1,13 +1,15 @@
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 
 const seedAdmin = async () => {
   try {
     const adminExists = await User.findOne({ role: 'admin' });
     if (!adminExists) {
+      const hashedPassword = await bcrypt.hash('adminpassword', 10);
       const adminUser = new User({
         username: 'admin',
         email: 'admin@example.com',
-        password: 'adminpassword', // Make sure to hash in real app
+        password: hashedPassword,
         role: 'admin',
       });
       await adminUser.save();
